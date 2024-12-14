@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import '../models/user.dart';
 
 class UserPage extends StatelessWidget {
-  const UserPage({super.key});
+  final User user;
+
+  UserPage({required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Info'),
+        title: Text('User Info'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-      body: const Center(
-        child: Text('User details will be displayed here!'),
+      body: Center(
+        child: Text('User details: ${user.toString()}'), 
       ),
     );
   }

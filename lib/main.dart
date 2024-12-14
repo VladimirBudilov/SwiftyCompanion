@@ -1,8 +1,5 @@
-// lib/main.dart
-
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
-import 'views/user_page.dart';
 
 void main() {
   runApp(UserSearchApp());
@@ -17,7 +14,6 @@ class UserSearchApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/user': (context) => UserPage(),
       },
     );
   }

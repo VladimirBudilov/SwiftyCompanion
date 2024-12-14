@@ -38,6 +38,7 @@ dependencies:
   dotenv: ^4.2.0
   oauth2: ^2.0.3
   flutter_dotenv: ^5.2.1
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:

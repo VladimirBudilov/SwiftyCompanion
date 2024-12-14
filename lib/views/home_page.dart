@@ -1,10 +1,10 @@
-// lib/views/home_page.dart
-
 import 'package:flutter/material.dart';
+import 'package:swifty_companion/services/auth_service.dart';
+import 'package:swifty_companion/services/user_service.dart';
+
+import 'user_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -13,15 +13,14 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
   String? _error;
+  AuthService _authService = AuthService();
+  UserService _userService = UserService();
 
   void _searchUser() async {
     setState(() {
       _isLoading = true;
       _error = null;
     });
-
-    // Mock API call (replace with actual service later)
-    await Future.delayed(const Duration(seconds: 2));
 
     final username = _controller.text;
 
@@ -33,16 +32,19 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    // Simulating a response
-    final isValidUser = username == "valid_user"; // Replace with API logic
+    final user = await _userService.getUserByLogin(username);
 
     setState(() {
       _isLoading = false;
-      if (!isValidUser) {
+      if (user == null) {
         _error = 'User not found';
       } else {
-        // Navigate to the next page
-        Navigator.pushNamed(context, '/user');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserPage(user: user),
+          ),
+        );
       }
     });
   }
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Search'),
+        title: Text('Choose peer'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -62,18 +64,18 @@ class _HomePageState extends State<HomePage> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
-                labelText: 'Enter Username',
+                labelText: 'Enter login',
                 errorText: _error,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: _isLoading ? null : _searchUser,
               child: _isLoading
-                  ? const CircularProgressIndicator(
+                  ? CircularProgressIndicator(
                       color: Colors.white,
                     )
-                  : const Text('Search'),
+                  : Text('Search'),
             ),
           ],
         ),

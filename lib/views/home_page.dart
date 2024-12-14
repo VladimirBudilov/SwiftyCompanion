@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:swifty_companion/services/auth_service.dart';
+import 'package:provider/provider.dart';
 import 'package:swifty_companion/services/user_service.dart';
-
 import 'user_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,8 +12,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
   String? _error;
-  AuthService _authService = AuthService();
-  UserService _userService = UserService();
 
   void _searchUser() async {
     setState(() {
@@ -32,7 +29,8 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    final user = await _userService.getUserByLogin(username);
+    final userService = Provider.of<UserService>(context, listen: false);
+    final user = await userService.getUserByLogin(username);
 
     setState(() {
       _isLoading = false;

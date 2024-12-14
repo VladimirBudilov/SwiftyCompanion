@@ -26,7 +26,21 @@ class AuthService {
     }
   }
 
-  void dispose() {
-    _client.close();
+  Future<String?> refreshToken() async {
+    try {
+      final uid = dotenv.env['API_UID']!;
+      final secret = dotenv.env['API_SECRET']!;
+      final tokenEndpoint = Uri.parse(dotenv.env['API_URL']!);
+
+      _client = await oauth2.clientCredentialsGrant(
+        tokenEndpoint,
+        uid,
+        secret,
+      );
+      return _client.credentials.accessToken;
+    } catch (e) {
+      print("Error refreshing token: $e");
+      return null;
+    }
   }
 }

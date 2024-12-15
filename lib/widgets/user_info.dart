@@ -9,36 +9,80 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('User Information:',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
-        Text('Username: ${user.login}', style: const TextStyle(fontSize: 16)),
-        const SizedBox(height: 8),
-        Text('Full Name: ${user.fullName}', style: const TextStyle(fontSize: 16)),
-        const SizedBox(height: 8),
-        Text('Email: ${user.email}', style: const TextStyle(fontSize: 16)),
-        const SizedBox(height: 8),
-        Image.network(user.imageUrl),
-        const SizedBox(height: 16),
-        if (user.campus != null) ...[
-          const Text('Campus Information:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          ClickableText(
-            text: 'Campus Name: ${user.campus!.name}',
-            url: user.campus!.website,
+    final screenHeight = MediaQuery.of(context).size.height;
+    final userInfoHeight = screenHeight / 3;
+
+    return Container(
+      height: userInfoHeight,
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Image.network(
+                  user.imageUrl,
+                  width: userInfoHeight / 2,
+                  height: userInfoHeight / 2,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        user.login,
+                        style: TextStyle(
+                          fontFamily: 'MotleyForces',
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        user.fullName,
+                        style: TextStyle(
+                          fontFamily: 'MotleyForces',
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        'Level: ${user.level.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontFamily: 'MotleyForces',
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 8),
-          Text('Address: ${user.campus!.address}',
-              style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 8),
-          Text('City: ${user.campus!.city}', style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 8),
+          Text(
+            user.email,
+            style: TextStyle(
+              fontFamily: 'MotleyForces',
+              fontSize: 18,
+            ),
+          ),
+          if (user.campus != null) ...[
+            Text(
+              '${user.campus!.name}, ${user.campus!.address}',
+              style: TextStyle(
+                fontFamily: 'MotleyForces',
+                fontSize: 18,
+              ),
+            ),
+          ],
         ],
-      ],
+      ),
     );
   }
 }

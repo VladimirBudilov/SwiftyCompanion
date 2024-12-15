@@ -67,6 +67,9 @@ flutter:
   assets:
     - assets/
     - assets/background/login_page/login5.jpeg
+    - assets/background/user_info_page/home2.jpeg
+    - assets/icons/true.png
+    - assets/icons/false.png
     - .env
 
   fonts:

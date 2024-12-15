@@ -13,9 +13,51 @@ class SkillsTab extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: user.skills.map((skill) {
-            return ListTile(
-              title: Text(skill.name),
-              subtitle: Text('Level: ${skill.level.toStringAsFixed(2)}'),
+            final completionPercentage = (skill.level / 20) * 100;
+            return Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8.0,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    skill.name,
+                    style: TextStyle(
+                      fontFamily: 'MotleyForces',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Level: ${skill.level.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontFamily: 'MotleyForces',
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Completion: ${completionPercentage.toStringAsFixed(2)}%',
+                    style: TextStyle(
+                      fontFamily: 'MotleyForces',
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
             );
           }).toList(),
         ),

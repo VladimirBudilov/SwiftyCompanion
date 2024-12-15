@@ -40,33 +40,62 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           },
         ),
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: UserInfo(user: widget.user),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                SkillsTab(user: widget.user),
-                ProjectsTab(user: widget.user),
-              ],
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background/user_info_page/home2.jpeg'),
+                fit: BoxFit.cover,
+              ),
             ),
+          ),
+          Container(
+            color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
+          ),
+          Column(
+            children: [
+              UserInfo(user: widget.user),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 159, 199, 232).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      SkillsTab(user: widget.user),
+                      ProjectsTab(user: widget.user),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(icon: Icon(Icons.school), text: 'Skills'),
-            Tab(icon: Icon(Icons.work), text: 'Projects'),
-          ],
-          labelColor: Colors.blue,
-          unselectedLabelColor: Colors.grey,
-          indicatorSize: TabBarIndicatorSize.label,
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.blue.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: BottomAppBar(
+            child: TabBar(
+              controller: _tabController,
+              tabs: const [
+                Tab(icon: Icon(Icons.school), text: 'Skills'),
+                Tab(icon: Icon(Icons.work), text: 'Projects'),
+              ],
+              labelColor: Colors.blue,
+              unselectedLabelColor: Colors.grey,
+              indicatorSize: TabBarIndicatorSize.label,
+            ),
+          ),
         ),
       ),
     );

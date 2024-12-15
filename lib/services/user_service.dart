@@ -24,20 +24,33 @@ class UserService {
     );
   }
 
-  Future<User?> getUserByLogin(String login) async {
+ Future<User?> getUserByLogin(String login) async {
     try {
       final response = await _client.get(Uri.parse('$_baseUrl/users/$login'));
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return User.fromJson(data);
-      } else {
-        print('Ошибка: ${response.statusCode}');
-        return null;
+      switch (response.statusCode) {
+        case 200:
+          final data = jsonDecode(response.body);
+          return User.fromJson(data);
+        case 404:
+          throw Exception('User not found');
+        case 401:
+        case 403:
+          throw Exception('Unauthorized access');
+        case 400:
+          throw Exception('Bad request');
+        case 500:
+        case 502:
+        case 503:
+        case 504:
+          throw Exception('Server error');
+        default:
+          throw Exception('Maybe later...');
       }
+    } on http.ClientException {
+      throw Exception('No internet');
     } catch (e) {
-      print('Ошибка запроса: $e');
-      return null;
+      throw Exception('$e');
     }
   }
 }

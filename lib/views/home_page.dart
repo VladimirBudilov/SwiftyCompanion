@@ -24,17 +24,18 @@ class _HomePageState extends State<HomePage> {
 
     if (username.isEmpty) {
       setState(() {
-        _error = 'Please enter a username';
+        _error = 'Enter login';
         _isLoading = false;
       });
       return;
     }
 
     final userService = Provider.of<UserService>(context, listen: false);
-    final user = await userService.getUserByLogin(username);
-
-    setState(() {
-      _isLoading = false;
+    try {
+      final user = await userService.getUserByLogin(username);
+      setState(() {
+        _isLoading = false;
+      });
       if (user == null) {
         setState(() {
           _error = 'User not found';
@@ -47,7 +48,12 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       }
-    });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _error = e.toString().replaceFirst('Exception: ', '');
+      });
+    }
   }
 
   @override
@@ -78,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     child: TextField(
                       controller: _controller,
                       textAlign: TextAlign.center,
-                      style: TextStyle( 
+                      style: TextStyle(
                         fontFamily: 'ChristmasStories',
                         fontSize: 34,
                       ),
@@ -101,9 +107,8 @@ class _HomePageState extends State<HomePage> {
                           color: const Color.fromARGB(255, 243, 71, 128),
                           fontFamily: 'ChristmasStories',
                           fontSize: 26,
-                          
                         ),
-                         alignLabelWithHint: true, 
+                        alignLabelWithHint: true,
                       ),
                     ),
                   ),

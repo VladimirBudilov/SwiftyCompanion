@@ -20,7 +20,7 @@ class UserService {
   void _initialize(AuthService authService) {
     _client = InterceptedClient.build(
       interceptors: [AuthInterceptor(authService)],
-      requestTimeout: Duration(seconds: 30),
+      requestTimeout: const Duration(seconds: 30),
     );
   }
 

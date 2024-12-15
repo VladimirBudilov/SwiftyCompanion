@@ -20,9 +20,9 @@ class Project {
       id: json['project']['id'],
       name: json['project']['name'],
       slug: json['project']['slug'],
-      finalMark: json['final_mark'],
-      validated: json['validated?'],
-      status: json['status'],
+      finalMark: json['final_mark'] ?? 0,
+      validated: json['validated?'] ?? false,
+      status: json['status'] ?? '',
     );
   }
 

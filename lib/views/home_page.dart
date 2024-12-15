@@ -4,6 +4,8 @@ import 'package:swifty_companion/services/user_service.dart';
 import 'user_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -51,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose peer'),
+        title: const Text('Choose peer'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -66,14 +68,14 @@ class _HomePageState extends State<HomePage> {
                 errorText: _error,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _isLoading ? null : _searchUser,
               child: _isLoading
-                  ? CircularProgressIndicator(
+                  ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
-                  : Text('Search'),
+                  : const Text('Search'),
             ),
           ],
         ),

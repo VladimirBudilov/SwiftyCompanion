@@ -16,7 +16,7 @@ void main() async {
 class UserSearchApp extends StatelessWidget {
   final AuthService authService;
 
-  UserSearchApp({required this.authService});
+  const UserSearchApp({super.key, required this.authService});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ class ClickableText extends StatelessWidget {
   final String text;
   final String url;
 
-  ClickableText({required this.text, required this.url});
+  const ClickableText({super.key, required this.text, required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ClickableText extends StatelessWidget {
       },
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: Colors.blue,
           decoration: TextDecoration.underline,

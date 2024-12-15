@@ -7,7 +7,7 @@ import 'package:swifty_companion/widgets/tabs/skills_tab.dart';
 class UserPage extends StatefulWidget {
   final User user;
 
-  UserPage({required this.user});
+  const UserPage({super.key, required this.user});
 
   @override
   _UserPageState createState() => _UserPageState();
@@ -32,9 +32,9 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Info'),
+        title: const Text('User Info'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },

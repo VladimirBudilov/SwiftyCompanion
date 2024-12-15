@@ -31,6 +31,7 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     var cursusUsers = json['cursus_users'] as List;
     var mainCursus = cursusUsers.firstWhere((cursus) => cursus['cursus']['kind'] == 'main', orElse: () => null);
+    var skills = mainCursus != null ? (mainCursus['skills'] as List).map((skill) => Skill.fromJson(skill)).toList() : <Skill>[];
 
     return User(
       id: json['id'],
@@ -41,8 +42,8 @@ class User {
       campus: (json['campus']?.isNotEmpty ?? false) ? Campus.fromJson(json['campus'][0]) : null,
       cursus: mainCursus != null ? Cursus.fromJson(mainCursus['cursus']) : null,
       projects: (json['projects_users'] as List).map((project) => Project.fromJson(project)).toList(),
-      
-      level: mainCursus != null ? mainCursus['level'] : 0.0,
+      skills: skills,
+      level: mainCursus != null ? (mainCursus['level'] ?? 0.0) : 0.0,
     );
   }
 
@@ -56,6 +57,7 @@ class User {
       'campus': campus?.toJson(),
       'cursus': cursus?.toJson(),
       'projects': projects.map((project) => project.toJson()).toList(),
+      'skills': skills.map((skill) => skill.toJson()).toList(),
       'level': level,
     };
   }

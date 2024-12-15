@@ -32,6 +32,12 @@ class User {
     var cursusUsers = json['cursus_users'] as List;
     var mainCursus = cursusUsers.firstWhere((cursus) => cursus['cursus']['kind'] == 'main', orElse: () => null);
     var skills = mainCursus != null ? (mainCursus['skills'] as List).map((skill) => Skill.fromJson(skill)).toList() : <Skill>[];
+    var mainCursusId = mainCursus != null ? mainCursus['cursus_id'] : null;
+
+    var projects = (json['projects_users'] as List)
+        .where((project) => project['cursus_ids'].contains(mainCursusId))
+        .map((project) => Project.fromJson(project))
+        .toList();
 
     return User(
       id: json['id'],
@@ -41,7 +47,7 @@ class User {
       imageUrl: json['image']['versions']['medium'],
       campus: (json['campus']?.isNotEmpty ?? false) ? Campus.fromJson(json['campus'][0]) : null,
       cursus: mainCursus != null ? Cursus.fromJson(mainCursus['cursus']) : null,
-      projects: (json['projects_users'] as List).map((project) => Project.fromJson(project)).toList(),
+      projects: projects,
       skills: skills,
       level: mainCursus != null ? (mainCursus['level'] ?? 0.0) : 0.0,
     );

@@ -19,7 +19,7 @@ class Cursus {
       name: json['name'],
       slug: json['slug'],
       kind: json['kind'],
-      level: json['level'] ?? 0.0,
+      level: (json['level'] ?? 0.0).toDouble(),
     );
   }
 

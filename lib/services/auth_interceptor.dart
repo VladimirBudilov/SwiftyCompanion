@@ -10,6 +10,7 @@ class AuthInterceptor implements InterceptorContract {
   @override
   Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
     final token = await _authService.getAccessToken();
+    print('Token: $token');
     if (token != null) {
       request.headers['Authorization'] = 'Bearer $token';
     }

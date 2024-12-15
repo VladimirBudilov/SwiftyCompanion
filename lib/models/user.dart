@@ -1,4 +1,7 @@
 import 'campus.dart';
+import 'cursus.dart';
+import 'project.dart';
+import 'skill.dart';
 
 class User {
   final int id;
@@ -6,8 +9,11 @@ class User {
   final String fullName;
   final String email;
   final String imageUrl;
-  final String intraUrl;
   final Campus? campus;
+  final Cursus? cursus;
+  final List<Project> projects;
+  final List<Skill> skills;
+  final double level;
 
   User({
     required this.id,
@@ -15,21 +21,28 @@ class User {
     required this.fullName,
     required this.email,
     required this.imageUrl,
-    required this.intraUrl,
     this.campus,
+    this.cursus,
+    required this.projects,
+    required this.skills,
+    required this.level,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
+    var cursusUsers = json['cursus_users'] as List;
+    var mainCursus = cursusUsers.firstWhere((cursus) => cursus['cursus']['kind'] == 'main', orElse: () => null);
+
     return User(
       id: json['id'],
       login: json['login'],
       fullName: json['usual_full_name'],
       email: json['email'],
       imageUrl: json['image']['versions']['medium'],
-      intraUrl: json['url'],
-      campus: (json['campus']?.isNotEmpty ?? false)
-          ? Campus.fromJson(json['campus'][0])
-          : null,
+      campus: (json['campus']?.isNotEmpty ?? false) ? Campus.fromJson(json['campus'][0]) : null,
+      cursus: mainCursus != null ? Cursus.fromJson(mainCursus['cursus']) : null,
+      projects: (json['projects_users'] as List).map((project) => Project.fromJson(project)).toList(),
+      
+      level: mainCursus != null ? mainCursus['level'] : 0.0,
     );
   }
 
@@ -40,9 +53,10 @@ class User {
       'fullName': fullName,
       'email': email,
       'imageUrl': imageUrl,
-      'intraUrl': intraUrl,
       'campus': campus?.toJson(),
+      'cursus': cursus?.toJson(),
+      'projects': projects.map((project) => project.toJson()).toList(),
+      'level': level,
     };
   }
 }
-

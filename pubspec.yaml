@@ -66,7 +66,16 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/background/login_page/login5.jpeg
     - .env
+
+  fonts:
+    - family: ChristmasStories
+      fonts:
+        - asset: assets/fonts/christmas-stories/Christmas Stories.otf
+    - family: MotleyForces
+      fonts:
+        - asset: assets/fonts/motley-forces-font/MotleyForcesRegular-w1rZ3.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

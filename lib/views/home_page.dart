@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:swifty_companion/models/user.dart';
 import 'package:swifty_companion/services/user_service.dart';
 import 'package:swifty_companion/views/user_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/background/login_page/login5.jpeg'),
                 fit: BoxFit.cover,
@@ -78,18 +79,18 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Spacer(flex: 2),
+                  const Spacer(flex: 2),
                   SizedBox(
                     width: screenWidth / 2,
                     child: TextField(
                       controller: _controller,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'ChristmasStories',
                         fontSize: 34,
                       ),
                       decoration: InputDecoration(
-                        label: Center(
+                        label: const Center(
                           child: Text(
                             'Enter login',
                             style: TextStyle(
@@ -98,13 +99,13 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           fontFamily: 'ChristmasStories',
                           fontSize: 34,
                         ),
                         errorText: _error,
-                        errorStyle: TextStyle(
-                          color: const Color.fromARGB(255, 243, 71, 128),
+                        errorStyle: const TextStyle(
+                          color: Color.fromARGB(255, 243, 71, 128),
                           fontFamily: 'ChristmasStories',
                           fontSize: 26,
                         ),
@@ -121,17 +122,17 @@ class _HomePageState extends State<HomePage> {
                           ? const CircularProgressIndicator(
                               color: Colors.white,
                             )
-                          : Text(
+                          : const Text(
                               'Search',
                               style: TextStyle(
                                 fontFamily: 'MotleyForces',
                                 fontSize: 30,
-                                color: const Color.fromARGB(255, 102, 174, 241),
+                                color: Color.fromARGB(255, 102, 174, 241),
                               ),
                             ),
                     ),
                   ),
-                  Spacer(flex: 3),
+                  const Spacer(flex: 3),
                 ],
               ),
             ),

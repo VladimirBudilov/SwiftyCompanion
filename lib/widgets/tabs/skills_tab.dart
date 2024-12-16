@@ -25,7 +25,7 @@ class SkillsTab extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 8.0,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -34,26 +34,26 @@ class SkillsTab extends StatelessWidget {
                 children: [
                   Text(
                     skill.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'MotleyForces',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Level: ${skill.level.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontFamily: 'MotleyForces',
-                      fontSize: 16,
+                    style: const TextStyle(
+                      fontFamily: 'ChristmasStories',
+                      fontSize: 26,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Completion: ${completionPercentage.toStringAsFixed(2)}%',
-                    style: TextStyle(
-                      fontFamily: 'MotleyForces',
-                      fontSize: 16,
+                    style: const TextStyle(
+                      fontFamily: 'ChristmasStories',
+                      fontSize: 26,
                     ),
                   ),
                 ],

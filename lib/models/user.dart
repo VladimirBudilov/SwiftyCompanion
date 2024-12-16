@@ -14,6 +14,7 @@ class User {
   final List<Project> projects;
   final List<Skill> skills;
   final double level;
+  final int wallet; 
 
   User({
     required this.id,
@@ -26,6 +27,7 @@ class User {
     required this.projects,
     required this.skills,
     required this.level,
+    required this.wallet, 
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -35,7 +37,7 @@ class User {
     var mainCursusId = mainCursus != null ? mainCursus['cursus_id'] : null;
 
     var projects = (json['projects_users'] as List)
-        .where((project) => project['cursus_ids'].contains(mainCursusId))
+        .where((project) => project['cursus_ids'].contains(mainCursusId) && project['status'] == 'finished')
         .map((project) => Project.fromJson(project))
         .toList();
 
@@ -50,6 +52,7 @@ class User {
       projects: projects,
       skills: skills,
       level: mainCursus != null ? (mainCursus['level'] ?? 0.0) : 0.0,
+      wallet: json['wallet'] ?? 0,
     );
   }
 
@@ -65,6 +68,7 @@ class User {
       'projects': projects.map((project) => project.toJson()).toList(),
       'skills': skills.map((skill) => skill.toJson()).toList(),
       'level': level,
+      'wallet': wallet, 
     };
   }
 }

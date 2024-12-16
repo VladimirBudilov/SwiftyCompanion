@@ -24,7 +24,7 @@ class ProjectsTab extends StatelessWidget {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 8.0,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
@@ -34,10 +34,10 @@ class ProjectsTab extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${project.name} / ${project.finalMark}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'MotleyForces',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),

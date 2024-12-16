@@ -32,7 +32,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Info'),
+        title: const Text('Back to search', style: TextStyle(fontFamily: 'MotleyForces')),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -43,7 +43,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/background/user_info_page/home2.jpeg'),
                 fit: BoxFit.cover,
@@ -87,9 +87,21 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           child: BottomAppBar(
             child: TabBar(
               controller: _tabController,
-              tabs: const [
-                Tab(icon: Icon(Icons.school), text: 'Skills'),
-                Tab(icon: Icon(Icons.work), text: 'Projects'),
+              tabs: [
+                Tab(
+                  icon: Image.asset(
+                    'assets/icons/skills.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
+                Tab(
+                  icon: Image.asset(
+                    'assets/icons/projects.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                ),
               ],
               labelColor: Colors.blue,
               unselectedLabelColor: Colors.grey,

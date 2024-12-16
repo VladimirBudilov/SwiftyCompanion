@@ -14,73 +14,82 @@ class UserInfo extends StatelessWidget {
 
     return Container(
       height: userInfoHeight,
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center, // Center items vertically
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Stack(
+            alignment: Alignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Image.network(
-                  user.imageUrl,
-                  width: userInfoHeight / 2,
-                  height: userInfoHeight / 2,
-                  fit: BoxFit.cover,
+              Container(
+                width: userInfoHeight / 2 - 20,
+                height: userInfoHeight / 2 - 20,
+                padding: const EdgeInsets.all(4.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    user.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        user.login,
-                        style: TextStyle(
-                          fontFamily: 'MotleyForces',
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        user.fullName,
-                        style: TextStyle(
-                          fontFamily: 'MotleyForces',
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        'Level: ${user.level.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontFamily: 'MotleyForces',
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
+              Container(
+                width: userInfoHeight / 1.5,
+                height: userInfoHeight / 1.5,
+                child: Image.asset(
+                  'assets/frame.png',
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            user.email,
-            style: TextStyle(
-              fontFamily: 'MotleyForces',
-              fontSize: 18,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  user.login,
+                  style: TextStyle(
+                    fontFamily: 'MotleyForces',
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  user.fullName,
+                  style: TextStyle(
+                    fontFamily: 'MotleyForces',
+                    fontSize: 18,
+                  ),
+                ),
+                Text(
+                  'Level: ${user.level.toStringAsFixed(2)}',
+                  style: TextStyle(
+                    fontFamily: 'MotleyForces',
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Wallet: ${user.wallet}',
+                  style: TextStyle(
+                    fontFamily: 'MotleyForces',
+                    fontSize: 18,
+                  ),
+                ),
+                if (user.campus != null) ...[
+                  Text(
+                    user.campus!.name,
+                    style: TextStyle(
+                      fontFamily: 'MotleyForces',
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
-          if (user.campus != null) ...[
-            Text(
-              '${user.campus!.name}, ${user.campus!.address}',
-              style: TextStyle(
-                fontFamily: 'MotleyForces',
-                fontSize: 18,
-              ),
-            ),
-          ],
         ],
       ),
     );

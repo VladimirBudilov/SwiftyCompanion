@@ -10,12 +10,10 @@ class AuthInterceptor implements InterceptorContract {
   @override
   Future<BaseRequest> interceptRequest({required BaseRequest request}) async {
     final token = await _authService.getAccessToken();
-    print('Token: $token');
     if (token != null) {
       request.headers['Authorization'] = 'Bearer $token';
     }
     request.headers['Content-Type'] = 'application/json';
-    print('Request: ${request.url}, Headers: ${request.headers}');
     return request;
   }
 
@@ -23,7 +21,6 @@ class AuthInterceptor implements InterceptorContract {
   Future<BaseResponse> interceptResponse(
       {required BaseResponse response}) async {
     if (response.statusCode == 401) {
-      print('Unauthorized request. Refreshing token...');
       final newToken = await _authService.refreshToken();
       if (newToken != null) {
         final retryRequest = (response.request as Request);
@@ -33,7 +30,6 @@ class AuthInterceptor implements InterceptorContract {
         return Response.fromStream(retriedResponse);
       }
     }
-    print('Response: ${response.statusCode}');
     return response;
   }
 

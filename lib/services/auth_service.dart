@@ -21,7 +21,6 @@ class AuthService {
     try {
       return _client.credentials.accessToken;
     } catch (e) {
-      print("Error fetching token: $e");
       return null;
     }
   }
@@ -39,7 +38,6 @@ class AuthService {
       );
       return _client.credentials.accessToken;
     } catch (e) {
-      print("Error refreshing token: $e");
       return null;
     }
   }

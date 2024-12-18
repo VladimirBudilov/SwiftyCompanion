@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
-                    width: screenWidth / 3,
+                    width: screenWidth / 2,
                     child: ElevatedButton(
                       onPressed: _isLoading ? null : _searchUser,
                       child: _isLoading
